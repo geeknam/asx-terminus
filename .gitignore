@@ -1,0 +1,13 @@
+*.pyc
+*.coverage
+
+# build
+*.egg-info/
+*dist/
+*build/
+
+# docs
+*docs/build/*
+*target
+
+*.sublime-*
