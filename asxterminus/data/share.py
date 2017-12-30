@@ -1,22 +1,6 @@
 from asxterminus.data.base import ApiBaseObject
-
-
-class Share(ApiBaseObject):
-
-    def __repr__(self):
-        return '%s - %s' % (self.code, self.last_price)
-
-    def to_cell(self, fields):
-        return [
-            getattr(self, field)
-            for field in fields
-        ]
-
-    def get_return(self, assets):
-        return sum([
-            asset.get_return(self.last_price)
-            for asset in assets
-        ])
+from asxterminus.data.news import NewsScraper
+from asxterminus.config import config
 
 
 class Asset(object):
@@ -32,6 +16,34 @@ class Asset(object):
     def get_return(self, current_price):
         return current_price * self.volume - self.total_price
 
+
+class Share(ApiBaseObject):
+
+    def __repr__(self):
+        return '%s - %s' % (self.code, self.last_price)
+
+    def to_dict(self, fields):
+        data = dict([
+            (field, getattr(self, field))
+            for field in fields
+        ])
+        data.update({
+            'return': self.get_return()
+        })
+        return data
+
+    @property
+    def assets(self):
+        return [
+            Asset(asset[0], asset[1])
+            for asset in config.assets.get(self.code, [])
+        ]
+
+    def get_return(self):
+        return sum([
+            asset.get_return(self.last_price)
+            for asset in self.assets
+        ])
 
 
 class AsxDataProvider(object):
@@ -54,3 +66,9 @@ class Portfolio(object):
             AsxDataProvider.get(code)
             for code in self.codes
         ]
+
+    def get_news(self):
+        documents = []
+        for code in self.codes:
+            documents.extend(NewsScraper(code).scrape())
+        return documents

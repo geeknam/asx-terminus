@@ -4,21 +4,14 @@ import yaml
 
 DEFAULT_CONFIG = {
     'title_bar': 'ASX Terminus',
-    'tab_size': 12,
-    'refresh_interval': 20,
+    'tab_size': 15,
+    'divider_char': '-',
+    'refresh_interval': 300,
     'columns': [
         'code',
         'last_price',
         'open_price',
-    ],
-    'codes': [
-        'KGN', 'A2M'
-    ],
-    'assets': {
-        'KGN': [
-            (1.48, 2000)
-        ]
-    }
+    ]
 }
 
 class ConfigLoader(object):
