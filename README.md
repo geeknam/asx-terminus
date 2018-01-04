@@ -81,3 +81,11 @@ Available fields (columns)
 - number_of_shares
 - deprecated_market_cap
 - deprecated_number_of_shares
+
+
+TODO
+===========
+
+[ ] Add Motley Fool news feed
+[ ] Add Portfolio Return
+[ ] Add Return Rate (%)
