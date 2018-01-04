@@ -5,10 +5,14 @@ asx-terminus
 [![pypi package]( https://img.shields.io/pypi/dm/asx-terminus.svg)]( https://pypi.python.org/pypi/asx-terminus)
 [![Build Status](https://travis-ci.org/geeknam/asx-terminus.svg?branch=master)](https://travis-ci.org/geeknam/asx-terminus)
 
-Install
-=============
+Installation
+================
 
-  $ pip install asx-terminus
+Install via pip
+
+    $ pip install asx-terminus
+
+Add `.asxterminus.yaml` file to your `$HOME` dir
 
 
 Sample Configuration file

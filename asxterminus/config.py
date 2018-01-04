@@ -7,6 +7,8 @@ DEFAULT_CONFIG = {
     'tab_size': 15,
     'divider_char': '-',
     'refresh_interval': 300,
+    'codes': [],
+    'transactions': {},
     'columns': [
         'code',
         'last_price',
