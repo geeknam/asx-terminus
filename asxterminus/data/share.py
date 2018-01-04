@@ -3,7 +3,7 @@ from asxterminus.data.news import NewsScraper
 from asxterminus.config import config
 
 
-class Asset(object):
+class Transaction(object):
 
     def __init__(self, purchase_price, volume):
         self.purchase_price = purchase_price
@@ -33,16 +33,16 @@ class Share(ApiBaseObject):
         return data
 
     @property
-    def assets(self):
+    def transactions(self):
         return [
-            Asset(asset[0], asset[1])
-            for asset in config.assets.get(self.code, [])
+            Transaction(transaction[0], transaction[1])
+            for transaction in config.transactions.get(self.code, [])
         ]
 
     def get_return(self):
         return sum([
-            asset.get_return(self.last_price)
-            for asset in self.assets
+            transaction.get_return(self.last_price)
+            for transaction in self.transactions
         ])
 
 

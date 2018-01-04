@@ -9,6 +9,7 @@ class Document(object):
         'release_date',
         'headline',
         'pages',
+        'link',
     )
 
     def __init__(self, code, release_date, headline, pages, link):

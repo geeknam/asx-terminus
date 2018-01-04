@@ -46,6 +46,7 @@ class Table(object):
 
     row_class = Row
     extra_headers = ()
+    extra_tab = 4
 
     def __init__(self, headers, data):
         self.headers = headers
@@ -68,7 +69,7 @@ class Table(object):
             ]
             all_values_in_column.append(len(header))
             tab = max(all_values_in_column)
-            tab_size[header] = tab + 4
+            tab_size[header] = tab + self.extra_tab
         return tab_size
 
     def format_column(self, name):

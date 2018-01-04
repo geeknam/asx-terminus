@@ -11,6 +11,11 @@ DEFAULT_CONFIG = {
         'code',
         'last_price',
         'open_price',
+        'day_high_price',
+        'day_low_price',
+        'change_in_percent',
+        'annual_dividend_yield',
+        'volume'
     ]
 }
 

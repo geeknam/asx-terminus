@@ -1,0 +1,78 @@
+asx-terminus
+======================
+
+[![pypi version]( https://img.shields.io/pypi/v/asx-terminus.svg)]( https://pypi.python.org/pypi/asx-terminus)
+[![pypi package]( https://img.shields.io/pypi/dm/asx-terminus.svg)]( https://pypi.python.org/pypi/asx-terminus)
+[![Build Status](https://travis-ci.org/geeknam/asx-terminus.svg?branch=master)](https://travis-ci.org/geeknam/asx-terminus)
+
+Install
+=============
+
+  $ pip install asx-terminus
+
+
+Sample Configuration file
+===============================
+
+Sample `~/.asxterminus.yaml` file
+
+```yaml
+    refresh_interval: 1200
+    codes:
+      - KGN
+      - A2M
+      - APX
+    transactions:
+      KGN:
+        -
+          - 1.48
+          - 10000
+        -
+          - 1.34
+          - 5000
+      A2M:
+        -
+          - 2.7
+          - 5000
+      APX:
+        -
+          - 2.5
+          - 10000
+    columns:
+      - code
+      - last_price
+      - open_price
+      - day_high_price
+      - day_low_price
+```
+
+Available fields (columns)
+===============================
+
+- code
+- desc_full
+- last_price
+- open_price
+- day_high_price
+- day_low_price
+- change_price
+- change_in_percent
+- volume
+- bid_price
+- offer_price
+- previous_close_price
+- previous_day_percentage_change
+- year_high_price
+- last_trade_date
+- year_high_date
+- year_low_price
+- year_low_date
+- year_open_date
+- pe
+- eps
+- average_daily_volume
+- annual_dividend_yield
+- market_cap
+- number_of_shares
+- deprecated_market_cap
+- deprecated_number_of_shares

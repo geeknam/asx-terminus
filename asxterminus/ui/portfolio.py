@@ -12,16 +12,30 @@ class QuoteRow(Row):
             style=style
         )
 
-    def get_header_style_map(self):
-        share_return = self.data.get('return', 0)
+    def get_style(self, field):
+        try:
+            value = self.data[field]
+            if isinstance(value, basestring) and '%' in value:
+                value = value.strip('%')
+            value = float(value)
+        except ValueError:
+            return self.style
         style = self.style
-        if share_return < 0:
+        if value < 0:
             style = 'loss'
-        if share_return > 0:
+        if value > 0:
             style = 'gain'
-        return {
-            'return': style
-        }
+        return style
+
+    def get_header_style_map(self):
+        colorized_fields = [
+            'change_in_percent', 'return',
+        ]
+        return dict([
+            (field, self.get_style(field))
+            for field in colorized_fields
+        ])
+
 
 class ShareTable(Table):
 
