@@ -2,8 +2,9 @@ asx-terminus
 ======================
 
 [![pypi version]( https://img.shields.io/pypi/v/asx-terminus.svg)]( https://pypi.python.org/pypi/asx-terminus)
-[![pypi package]( https://img.shields.io/pypi/dm/asx-terminus.svg)]( https://pypi.python.org/pypi/asx-terminus)
 [![Build Status](https://travis-ci.org/geeknam/asx-terminus.svg?branch=master)](https://travis-ci.org/geeknam/asx-terminus)
+
+![Screenshot](https://raw.githubusercontent.com/geeknam/asx-terminus/master/asxterminus.png)
 
 Installation
 ================
