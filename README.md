@@ -1,13 +1,12 @@
-asx-terminus
-======================
+# asx-terminus
+
 
 [![pypi version]( https://img.shields.io/pypi/v/asx-terminus.svg)]( https://pypi.python.org/pypi/asx-terminus)
 [![Build Status](https://travis-ci.org/geeknam/asx-terminus.svg?branch=master)](https://travis-ci.org/geeknam/asx-terminus)
 
 ![Screenshot](https://raw.githubusercontent.com/geeknam/asx-terminus/master/asxterminus.png)
 
-Installation
-================
+### Installation
 
 Install via pip
 
@@ -16,8 +15,7 @@ Install via pip
 Add `.asxterminus.yaml` file to your `$HOME` dir
 
 
-Sample Configuration file
-===============================
+### Sample Configuration file
 
 Sample `~/.asxterminus.yaml` file
 
@@ -51,8 +49,7 @@ Sample `~/.asxterminus.yaml` file
       - day_low_price
 ```
 
-Available fields (columns)
-===============================
+### Available fields (columns)
 
 - code
 - desc_full
@@ -83,9 +80,8 @@ Available fields (columns)
 - deprecated_number_of_shares
 
 
-TODO
-===========
+### TODO
 
-[ ] Add Motley Fool news feed
-[ ] Add Portfolio Return
-[ ] Add Return Rate (%)
+- [ ] Add Motley Fool news feed
+- [ ] Add Portfolio Return
+- [ ] Add Return Rate (%)
