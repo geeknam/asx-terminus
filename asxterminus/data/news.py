@@ -27,7 +27,7 @@ class NewsScraper(object):
 
     DOMAIN = 'http://www.asx.com.au'
     SOURCE_URL = 'http://www.asx.com.au/asx/statistics/announcements.do'
-    PARSER = 'lxml'
+    PARSER = 'html.parser'
 
     def __init__(self, code, timeframe='D', period='W'):
         self.code = code
