@@ -23,7 +23,7 @@ class Document(object):
         return self.__dict__
 
 
-class NewsScraper(object):
+class AnnouncementsScraper(object):
 
     DOMAIN = 'http://www.asx.com.au'
     SOURCE_URL = 'http://www.asx.com.au/asx/statistics/announcements.do'

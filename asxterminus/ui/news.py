@@ -10,7 +10,7 @@ class AnnouncementTable(Table):
         self.portfolio = portfolio
         data = [
             document.to_dict()
-            for document in self.portfolio.get_news()
+            for document in self.portfolio.get_announcements()
         ]
         super(AnnouncementTable, self).__init__(
             headers=Document.FIELDS,

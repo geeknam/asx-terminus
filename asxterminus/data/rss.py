@@ -17,6 +17,8 @@ class RssItem(object):
 
 class BaseRssFeedParser(object):
 
+    MAX_ITEMS = 2
+
     def __init__(self, symbol):
         self.rss_url = self.BASE_RSS_URL % symbol
         self.feed = feedparser.parse(self.rss_url)
@@ -33,7 +35,7 @@ class BaseRssFeedParser(object):
     @property
     def items(self):
         items = []
-        for item in self.feed.entries[:2]:
+        for item in self.feed.entries[:self.MAX_ITEMS]:
             items.append(
                 RssItem(
                     title=self.get_item_title(item),

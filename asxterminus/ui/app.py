@@ -14,7 +14,7 @@ class TerminalApp(object):
         self.quote_table = ShareTable(
             portfolio=portfolio
         )
-        self.news_table = AnnouncementTable(portfolio=self.portfolio)
+        self.announcements_table = AnnouncementTable(portfolio=self.portfolio)
         self.rss_table = GoogleFinanceNews(portfolio=self.portfolio)
         self.main_loop = urwid.MainLoop(
             self.get_layout(),
@@ -68,8 +68,8 @@ class TerminalApp(object):
         self.quote_box = urwid.Padding(quote_text, left=2, right=0)
         return self.quote_box
 
-    def get_news_table(self):
-        text = urwid.Text(self.news_table.render())
+    def get_announcements_table(self):
+        text = urwid.Text(self.announcements_table.render())
         self.news_box = urwid.Padding(text, left=2, right=0)
         return self.news_box
 
@@ -83,11 +83,11 @@ class TerminalApp(object):
             div_char=self.config.divider_char, top=1, bottom=1
         )
         quote_table = self.get_quote_table()
-        news_table = self.get_news_table()
+        announcements_table = self.get_announcements_table()
         rss_table = self.get_rss_table()
         lw = urwid.SimpleFocusListWalker([
             quote_table, divider,
-            news_table, divider,
+            announcements_table, divider,
             rss_table
         ])
         return urwid.ListBox(lw)

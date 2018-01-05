@@ -8,11 +8,15 @@
 
 ### Installation
 
-Install via pip
+Install via pip:
 
     $ pip install asx-terminus
 
 Add `.asxterminus.yaml` file to your `$HOME` dir
+
+Start in you terminal:
+
+    $ asxterminus
 
 
 ### Sample Configuration file
@@ -82,6 +86,6 @@ Sample `~/.asxterminus.yaml` file
 
 ### TODO
 
-- [ ] Add Motley Fool news feed
+- [x] Add Google Finance RSS feeds
 - [ ] Add Portfolio Return
 - [ ] Add Return Rate (%)
