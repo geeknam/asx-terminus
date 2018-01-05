@@ -3,7 +3,8 @@ import urwid
 from asxterminus.config import config
 
 from .portfolio import ShareTable
-from .news import NewsTable
+from .news import AnnouncementTable, GoogleFinanceNews
+
 
 class TerminalApp(object):
 
@@ -13,7 +14,8 @@ class TerminalApp(object):
         self.quote_table = ShareTable(
             portfolio=portfolio
         )
-        self.news_table = NewsTable(portfolio=self.portfolio)
+        self.news_table = AnnouncementTable(portfolio=self.portfolio)
+        self.rss_table = GoogleFinanceNews(portfolio=self.portfolio)
         self.main_loop = urwid.MainLoop(
             self.get_layout(),
             self.palette,
@@ -64,14 +66,17 @@ class TerminalApp(object):
     def get_quote_table(self):
         quote_text = urwid.Text(self.quote_table.render())
         self.quote_box = urwid.Padding(quote_text, left=2, right=0)
-        # self.quote_box = urwid.LineBox(padding)
         return self.quote_box
 
     def get_news_table(self):
-        quote_text = urwid.Text(self.news_table.render())
-        self.news_box = urwid.Padding(quote_text, left=2, right=0)
-        # self.quote_box = urwid.LineBox(padding)
+        text = urwid.Text(self.news_table.render())
+        self.news_box = urwid.Padding(text, left=2, right=0)
         return self.news_box
+
+    def get_rss_table(self):
+        text = urwid.Text(self.rss_table.render())
+        self.rss_box = urwid.Padding(text, left=2, right=0)
+        return self.rss_box
 
     def get_body(self):
         divider = urwid.Divider(
@@ -79,8 +84,11 @@ class TerminalApp(object):
         )
         quote_table = self.get_quote_table()
         news_table = self.get_news_table()
+        rss_table = self.get_rss_table()
         lw = urwid.SimpleFocusListWalker([
-            quote_table, divider, news_table
+            quote_table, divider,
+            news_table, divider,
+            rss_table
         ])
         return urwid.ListBox(lw)
 

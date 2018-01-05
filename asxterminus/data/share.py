@@ -1,5 +1,6 @@
 from asxterminus.data.base import ApiBaseObject
 from asxterminus.data.news import NewsScraper
+from asxterminus.data.rss import GoogleFinance
 from asxterminus.config import config
 
 
@@ -72,3 +73,11 @@ class Portfolio(object):
         for code in self.codes:
             documents.extend(NewsScraper(code).scrape())
         return documents
+
+    def get_rss(self):
+        rss_items = []
+        for code in self.codes:
+            rss_items.extend(
+                GoogleFinance(code).items
+            )
+        return rss_items
