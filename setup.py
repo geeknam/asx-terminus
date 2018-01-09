@@ -7,6 +7,7 @@ requires = [
     "urwid>=1.3.1",
     "pyyaml>=3.12",
     "beautifulsoup4==4.6.0",
+    "feedparser==5.2.1",
 ]
 
 setup(
@@ -15,7 +16,7 @@ setup(
         exclude=['tests',]
     ),
     license='Apache 2.0',
-    version='0.1.3',
+    version='0.1.4',
     description='ASX portfolio in the terminal',
     long_description=open('README.md').read(),
     author='Nam Ngo',

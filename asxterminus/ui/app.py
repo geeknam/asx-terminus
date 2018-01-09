@@ -52,6 +52,12 @@ class TerminalApp(object):
         self.quote_box.base_widget.set_text(
             self.quote_table.render()
         )
+        self.news_box.base_widget.set_text(
+            self.announcements_table.render()
+        )
+        self.rss_box.base_widget.set_text(
+            self.rss_table.render()
+        )
         self.main_loop.set_alarm_in(
             int(self.config.refresh_interval), self.refresh
         )
