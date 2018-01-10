@@ -48,6 +48,10 @@ class TerminalApp(object):
             self.exit()
 
     def refresh(self, a, b):
+        self.quote_table.refresh()
+        self.announcements_table.refresh()
+        self.rss_table.refresh()
+
         self.main_loop.draw_screen()
         self.quote_box.base_widget.set_text(
             self.quote_table.render()

@@ -44,11 +44,18 @@ class ShareTable(Table):
 
     def __init__(self, portfolio):
         self.portfolio = portfolio
-        data = [
-            share.to_dict(config.columns)
-            for share in self.portfolio.get_share_prices()
-        ]
+        data = self.get_dataset()
         super(ShareTable, self).__init__(
             headers=config.columns,
             data=data
         )
+
+    def get_dataset(self):
+        data = [
+            share.to_dict(config.columns)
+            for share in self.portfolio.get_share_prices()
+        ]
+        return data
+
+    def refresh(self):
+        self.data = self.get_dataset()
