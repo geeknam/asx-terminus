@@ -107,3 +107,19 @@ class Table(object):
             row.render()
             for row in self.get_all_rows()
         ]
+
+    def refresh(self, progress_bar):
+        self.update_data(
+            self.get_dataset(progress_bar)
+        )
+
+
+class PortfolioTable(Table):
+
+    def __init__(self, portfolio):
+        self.portfolio = portfolio
+
+        super(PortfolioTable, self).__init__(
+            headers=self.HEADERS,
+            data=list()
+        )

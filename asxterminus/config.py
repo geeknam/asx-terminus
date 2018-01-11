@@ -6,7 +6,7 @@ DEFAULT_CONFIG = {
     'title_bar': 'ASX Terminus',
     'tab_size': 15,
     'divider_char': '-',
-    'refresh_interval': 300,
+    'refresh_interval': 1200,
     'codes': [],
     'transactions': {},
     'columns': [

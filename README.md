@@ -87,5 +87,6 @@ Sample `~/.asxterminus.yaml` file
 ### TODO
 
 - [x] Add Google Finance RSS feeds
+- [x] Add progress bar when loading data
 - [ ] Add Portfolio Return
 - [ ] Add Return Rate (%)

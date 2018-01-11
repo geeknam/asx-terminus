@@ -1,5 +1,5 @@
 from asxterminus.config import config
-from asxterminus.ui.table import Table, Row
+from asxterminus.ui.table import PortfolioTable, Row
 
 
 class QuoteRow(Row):
@@ -37,18 +37,11 @@ class QuoteRow(Row):
         ])
 
 
-class ShareTable(Table):
+class ShareTable(PortfolioTable):
 
+    HEADERS = config.columns
     row_class = QuoteRow
     extra_headers = ('return', )
-
-    def __init__(self, portfolio):
-        self.portfolio = portfolio
-        data = []
-        super(ShareTable, self).__init__(
-            headers=config.columns,
-            data=data
-        )
 
     def get_dataset(self, progress_bar=None):
         data = [
@@ -56,8 +49,3 @@ class ShareTable(Table):
             for share in self.portfolio.get_share_prices(progress_bar)
         ]
         return data
-
-    def refresh(self, progress_bar):
-        self.update_data(
-            self.get_dataset(progress_bar)
-        )
