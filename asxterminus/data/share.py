@@ -62,22 +62,31 @@ class Portfolio(object):
     def __init__(self, codes):
         self.codes = codes
 
-    def get_share_prices(self):
-        return [
-            AsxDataProvider.get(code)
-            for code in self.codes
-        ]
+    def on_progress_update(self, progress_bar):
+        progress_bar.add_progress(1)
 
-    def get_announcements(self):
+    def get_share_prices(self, progress_bar=None):
+        shares = []
+        for code in self.codes:
+            shares.append(AsxDataProvider.get(code))
+            if progress_bar:
+                self.on_progress_update(progress_bar)
+        return shares
+
+    def get_announcements(self, progress_bar=None):
         documents = []
         for code in self.codes:
             documents.extend(AnnouncementsScraper(code).scrape())
+            if progress_bar:
+                self.on_progress_update(progress_bar)
         return documents
 
-    def get_rss(self):
+    def get_rss(self, progress_bar=None):
         rss_items = []
         for code in self.codes:
             rss_items.extend(
                 GoogleFinance(code).items
             )
+            if progress_bar:
+                self.on_progress_update(progress_bar)
         return rss_items

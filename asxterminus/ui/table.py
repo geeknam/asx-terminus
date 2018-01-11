@@ -51,12 +51,14 @@ class Table(object):
     def __init__(self, headers, data):
         self.headers = headers
         self.data = data
-        all_headers = self.get_headers()
-        self.tab_size = self.get_tab_size()
+        self.update_data(data)
+
+    def update_data(self, data):
+        self.data = data
         self.rows = [
             self.row_class(
-                headers=all_headers, data=item,
-                tab_size=self.tab_size
+                headers=self.get_headers(), data=item,
+                tab_size=self.get_tab_size()
             )
             for item in data
         ]
@@ -94,7 +96,7 @@ class Table(object):
                 (item, item)
                 for item in headers
             ]),
-            tab_size=self.tab_size,
+            tab_size=self.get_tab_size(),
             style='headers'
         )
         rows.insert(0, header)

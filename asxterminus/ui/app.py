@@ -1,9 +1,20 @@
 import urwid
+from urwid_timed_progress import TimedProgressBar
 
 from asxterminus.config import config
 
 from .portfolio import ShareTable
 from .news import AnnouncementTable, GoogleFinanceNews
+
+class Progress(object):
+
+    def __init__(self, bar, loop):
+        self.bar = bar
+        self.loop = loop
+
+    def add_progress(self, unit):
+        self.bar.add_progress(unit)
+        self.loop.draw_screen()
 
 
 class TerminalApp(object):
@@ -11,6 +22,12 @@ class TerminalApp(object):
     def __init__(self, config, portfolio):
         self.config = config
         self.portfolio = portfolio
+        self.bar = TimedProgressBar(
+            'normal', 'complete',
+            done=len(self.portfolio.codes) * 3,
+            units=[('requests', 1)],
+            label='Loading Data'
+        )
         self.quote_table = ShareTable(
             portfolio=portfolio
         )
@@ -21,9 +38,15 @@ class TerminalApp(object):
             self.palette,
             unhandled_input=self.handle_input
         )
+        self.progress = Progress(self.bar, self.main_loop)
+
 
     def run(self):
+        self.main_loop.set_alarm_in(
+            0.1, self.refresh
+        )
         self.main_loop.run()
+
 
     def exit(self):
         raise urwid.ExitMainLoop()
@@ -31,6 +54,8 @@ class TerminalApp(object):
     @property
     def palette(self):
         return [
+            ('normal',   'white', 'black', 'standout'),
+            ('complete', 'white', 'dark green'),
             ('titlebar', 'dark blue,bold', ''),
             ('refresh', 'dark green,bold', ''),
             ('quit', 'dark red,bold', ''),
@@ -48,11 +73,11 @@ class TerminalApp(object):
             self.exit()
 
     def refresh(self, a, b):
-        self.quote_table.refresh()
-        self.announcements_table.refresh()
-        self.rss_table.refresh()
+        self.bar.reset()
+        self.quote_table.refresh(self.progress)
+        self.announcements_table.refresh(self.progress)
+        self.rss_table.refresh(self.progress)
 
-        self.main_loop.draw_screen()
         self.quote_box.base_widget.set_text(
             self.quote_table.render()
         )
@@ -62,6 +87,7 @@ class TerminalApp(object):
         self.rss_box.base_widget.set_text(
             self.rss_table.render()
         )
+        self.main_loop.draw_screen()
         self.main_loop.set_alarm_in(
             int(self.config.refresh_interval), self.refresh
         )
@@ -96,6 +122,7 @@ class TerminalApp(object):
         announcements_table = self.get_announcements_table()
         rss_table = self.get_rss_table()
         lw = urwid.SimpleFocusListWalker([
+            self.bar, divider,
             quote_table, divider,
             announcements_table, divider,
             rss_table
