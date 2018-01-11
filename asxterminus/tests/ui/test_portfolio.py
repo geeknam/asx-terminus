@@ -41,6 +41,7 @@ class TestShareTable(TestCase):
 
     def test_table(self):
         table = ShareTable(self.portfolio)
+        table.refresh(None)
         rendered = table.render()
         self.assertEquals(
             rendered[0], [
