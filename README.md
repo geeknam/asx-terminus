@@ -90,3 +90,7 @@ Sample `~/.asxterminus.yaml` file
 - [x] Add progress bar when loading data
 - [ ] Add Portfolio Return
 - [ ] Add Return Rate (%)
+
+### Disclaimer
+
+This software should not be used as a financial advisor, it is for educational use only. Absolutely no warranty is implied with this product. By using this software you release the author(s) from any liability regarding the use of this software. You can lose money because this program probably has some errors in it, so use it at your own risk. And please don't take risks with money you can't afford to lose.
