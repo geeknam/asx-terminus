@@ -29,7 +29,7 @@ class QuoteRow(Row):
 
     def get_header_style_map(self):
         colorized_fields = [
-            'change_in_percent', 'return',
+            'return',
         ]
         return dict([
             (field, self.get_style(field))

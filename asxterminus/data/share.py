@@ -1,3 +1,5 @@
+import os
+from decimal import Decimal
 from asxterminus.data.base import ApiBaseObject
 from asxterminus.data.news import AnnouncementsScraper
 from asxterminus.data.rss import GoogleFinance
@@ -15,13 +17,14 @@ class Transaction(object):
         return self.purchase_price * self.volume
 
     def get_return(self, current_price):
-        return current_price * self.volume - self.total_price
+        return (Decimal(current_price) * self.volume) \
+            .quantize(Decimal('.01')) - Decimal(self.total_price)
 
 
 class Share(ApiBaseObject):
 
     def __repr__(self):
-        return '%s - %s' % (self.code, self.last_price)
+        return self.code
 
     def to_dict(self, fields):
         data = dict([
@@ -42,19 +45,31 @@ class Share(ApiBaseObject):
 
     def get_return(self):
         return sum([
-            transaction.get_return(self.last_price)
+            transaction.get_return(self.close)
             for transaction in self.transactions
         ])
 
 
+# XXX: support discontinued
 class AsxDataProvider(object):
-
     BASE_URL = 'http://data.asx.com.au/data/1/share/%s/'
 
     @classmethod
     def get(cls, code):
         url = cls.BASE_URL % code.upper()
         return Share.build_from(url)
+
+
+class AlphavantageProvider(object):
+    BASE_URL = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=%s&apikey=%s'
+
+    @classmethod
+    def get(cls, code):
+        url = cls.BASE_URL % (
+            '%s.AX' % code.upper(),
+            os.getenv('ALPHAVANTAGE_API_KEY', 'Z47LCX423HZ35JA1')
+        )
+        return Share.build_from_daily(url)
 
 
 class Portfolio(object):
@@ -68,7 +83,7 @@ class Portfolio(object):
     def get_share_prices(self, progress_bar=None):
         shares = []
         for code in self.codes:
-            shares.append(AsxDataProvider.get(code))
+            shares.append(AlphavantageProvider.get(code))
             if progress_bar:
                 self.on_progress_update(progress_bar)
         return shares

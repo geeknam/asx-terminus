@@ -56,9 +56,9 @@ class AnnouncementsScraper(object):
                 cols = row.findAll('td')
                 if len(cols) > 0:
                     release_date = cols[0].next_element.strip()
-                    headline = cols[2].next_element.strip()
-                    pages = int(cols[3].next_element.strip())
-                    link = '%s%s' % (self.DOMAIN, cols[4].a['href'])
+                    headline = cols[2].find('a').contents[0].strip()
+                    pages = int(cols[2].a.span.contents[0].strip().split('\r')[0])
+                    link = '%s%s' % (self.DOMAIN, cols[2].a['href'])
 
                     documents.append(
                         Document(self.code, release_date, headline, pages, link)
