@@ -49,7 +49,7 @@ class Share(ApiBaseObject):
 
 class AsxDataProvider(object):
 
-    BASE_URL = 'http://data.asx.com.au/data/1/share/%s/'
+    BASE_URL = 'http://www.asx.com.au/asx/1/share/%s'
 
     @classmethod
     def get(cls, code):
